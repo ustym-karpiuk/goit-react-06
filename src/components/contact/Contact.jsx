@@ -1,8 +1,16 @@
 import { MdPhoneIphone } from "react-icons/md";
 import { BiSolidContact } from "react-icons/bi";
+import { useDispatch } from "react-redux";
+import { deleteContact } from "../../redux/contactsSlice";
 import styles from "./Contact.module.css";
 
-const Contact = ({ id, name, number, onDelete }) => {
+const Contact = ({ id, name, number }) => {
+  const dispatch = useDispatch();
+
+  const handleDelete = () => {
+    dispatch(deleteContact(id));
+  };
+
   return (
     <div className={styles.contactStyle}>
       <li key={id}>
@@ -15,7 +23,7 @@ const Contact = ({ id, name, number, onDelete }) => {
           <p className={styles.textStyle}>Number: {number}</p>
         </div>
       </li>
-      <button className={styles.deleteButton} onClick={() => onDelete(id)}>
+      <button className={styles.deleteButton} onClick={handleDelete}>
         Delete
       </button>     
     </div>
